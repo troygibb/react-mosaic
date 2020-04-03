@@ -54,6 +54,7 @@ export interface MosaicControlledProps<T extends MosaicKey> extends MosaicBasePr
    */
   value: MosaicNode<T> | null;
   onChange: (newNode: MosaicNode<T> | null) => void;
+  mosaicId?: string;
 }
 
 export interface MosaicUncontrolledProps<T extends MosaicKey> extends MosaicBaseProps<T> {
@@ -96,6 +97,13 @@ export class MosaicWithoutDragDropContext<T extends MosaicKey = string> extends 
       };
     }
 
+    if (!isUncontrolled(nextProps) && nextProps.mosaicId !== prevState.mosaicId && nextProps.mosaicId) {
+      console.log('updating state to mosaicId from', prevState.mosaicId, 'to ', nextProps.mosaicId);
+      return {
+        mosaicId: nextProps.mosaicId,
+      };
+    }
+
     return null;
   }
 
@@ -107,9 +115,12 @@ export class MosaicWithoutDragDropContext<T extends MosaicKey = string> extends 
 
   render() {
     const { className } = this.props;
+    // FOLLOW UP: Will refactoring context out of a static object end up in significantly more re-renders?
 
     return (
-      <MosaicContext.Provider value={this.childContext as MosaicContext<any>}>
+      <MosaicContext.Provider
+        value={{ mosaicId: this.state.mosaicId, mosaicActions: this.actions } as MosaicContext<any>}
+      >
         <div className={classNames(className, 'mosaic mosaic-drop-target')}>
           {this.renderTree()}
           <RootDropTargets />
@@ -165,11 +176,6 @@ export class MosaicWithoutDragDropContext<T extends MosaicKey = string> extends 
           },
         },
       ]),
-  };
-
-  private readonly childContext: MosaicContext<T> = {
-    mosaicActions: this.actions,
-    mosaicId: this.state.mosaicId,
   };
 
   private renderTree() {

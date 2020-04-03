@@ -20,7 +20,7 @@ class RootDropTargetsClass extends React.PureComponent<RootDropTargetsProps> {
         })}
       >
         {values<MosaicDropTargetPosition>(MosaicDropTargetPosition).map((position) => (
-          <MosaicDropTarget position={position} path={[]} key={position} />
+          <MosaicDropTarget position={position} path={[]} key={position} parentId={''} />
         ))}
       </div>
     );

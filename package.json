@@ -26,7 +26,8 @@
     "fix": "npm-run-all -lp fix:**",
     "fix:format": "yarn run prettier:run --write",
     "fix:lint": "yarn run test:lint --fix",
-    "version": "npm run bundle && git add -A docs/"
+    "version": "npm run bundle && git add -A docs/",
+    "update-package": "rm -rf ~/code/webviz/node_modules/react-mosaic-component/lib && npm run build && cp -fR ~/code/open_source/react-mosaic/lib ~/code/webviz/node_modules/react-mosaic-component/lib"
   },
   "devDependencies": {
     "@blueprintjs/core": "^3.15.1",

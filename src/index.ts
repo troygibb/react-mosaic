@@ -54,6 +54,7 @@ export {
   isParent,
 } from './util/mosaicUtilities';
 export { MosaicWindow, MosaicWindowProps } from './MosaicWindow';
+export { MosaicNestedWindow, MosaicNestedWindowProps } from './MosaicNestedWindow';
 export { createDefaultToolbarButton, MosaicButtonProps } from './buttons/MosaicButton';
 export { MosaicZeroState, MosaicZeroStateProps } from './MosaicZeroState';
 export { Separator } from './buttons/Separator';
